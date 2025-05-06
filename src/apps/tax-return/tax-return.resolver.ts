@@ -3,7 +3,10 @@ import { CapitalizeInput } from './resolver-dto/capitalize.model';
 import { TaxReturnService } from './tax-return.service';
 import { TaxReturnClientService, SubmissionDto } from '@clients/tax-return/';
 import { TaxReturnInfoInput } from './resolver-dto/tax-return-info.input';
-import { TaxReturnInfo } from './resolver-dto/tax-return-info.model';
+import {
+  mapTaxReturnInfo,
+  TaxReturnInfo,
+} from './resolver-dto/tax-return-info.model';
 
 @Resolver()
 export class TaxReturnResolver {
@@ -26,10 +29,14 @@ export class TaxReturnResolver {
     return this.taxReturnService.capitalize(input.input);
   }
 
-  @Query(() => TaxReturnInfo)
+  @Query(() => TaxReturnInfo, { nullable: true })
   async getLatestTaxReturnInfo(
     @Args('input') input: TaxReturnInfoInput,
-  ): Promise<SubmissionDto | undefined> {
-    return await this.taxReturnClient.getLatestSubmission(input.ssn);
+  ): Promise<TaxReturnInfo | undefined> {
+    const res = await this.taxReturnClient.getLatestSubmission(input.ssn);
+    if (res) {
+      return mapTaxReturnInfo(res);
+    }
+    return undefined;
   }
 }

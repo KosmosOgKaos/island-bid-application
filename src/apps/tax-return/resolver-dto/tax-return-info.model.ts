@@ -125,8 +125,8 @@ export const mapTaxReturnInfo = (submission: SubmissionDto): TaxReturnInfo => {
 
   return {
     person: {
-      ssn: kennitala,
       ...person,
+      ssn: kennitala,
     },
     debts: debts.map(mapTaxReturnInfoDebt),
     incomes: incomes.map(mapTaxReturnInfoIncome),
@@ -140,8 +140,8 @@ export const mapTaxReturnInfoDebt = (
   const { creditorKennitala } = debt;
 
   return {
-    creditorSsn: creditorKennitala,
     ...debt,
+    creditorSsn: creditorKennitala,
   };
 };
 
