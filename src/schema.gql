@@ -26,6 +26,11 @@ type Mutation {
 type Query {
   capitalize(input: CapitalizeInput!): String!
   getLatestTaxReturnInfo(input: TaxReturnInfoInput!): TaxReturnInfo
+}
+
+type Query {
+  capitalize(input: CapitalizeInput!): String!
+  getLatestTaxReturnInfo(input: TaxReturnInfoInput!): TaxReturnInfo!
   getRandomString: String!
 }
 
