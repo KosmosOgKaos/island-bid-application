@@ -2,9 +2,11 @@ import { Module } from '@nestjs/common';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { GraphQLModule } from '@nestjs/graphql';
 import { join } from 'path';
-import { DemoController } from './demo/demo.controller';
-import { DemoService } from './demo/demo.service';
-import { DemoResolver } from './demo/demo.resolver';
+import { TaxReturnClientService } from '@clients/tax-return/tax-return-client.service';
+import { TaxReturnClientModule } from '@clients/tax-return/tax-return-client.module';
+import { TaxReturnController } from './apps/tax-return/tax-return.controller';
+import { TaxReturnService } from './apps/tax-return/tax-return.service';
+import { TaxReturnResolver } from './apps/tax-return/tax-return.resolver';
 
 @Module({
   imports: [
@@ -14,8 +16,9 @@ import { DemoResolver } from './demo/demo.resolver';
       autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
       sortSchema: true,
     }),
+    TaxReturnClientModule,
   ],
-  controllers: [DemoController],
-  providers: [DemoService, DemoResolver],
+  controllers: [TaxReturnController],
+  providers: [TaxReturnService, TaxReturnResolver, TaxReturnClientService],
 })
 export class AppModule {}
