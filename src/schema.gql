@@ -11,9 +11,21 @@ The `JSONObject` scalar type represents JSON objects as specified by [ECMA-404](
 """
 scalar JSONObject
 
+input LoginInput {
+  phoneNumber: String!
+}
+
+type LoginResponse {
+  success: Boolean!
+}
+
+type Mutation {
+  login(input: LoginInput!): LoginResponse!
+}
+
 type Query {
   capitalize(input: CapitalizeInput!): String!
-  getLatestTaxReturnInfo(input: TaxReturnInfoInput!): TaxReturnInfo!
+  getLatestTaxReturnInfo(input: TaxReturnInfoInput!): TaxReturnInfo
   getRandomString: String!
 }
 

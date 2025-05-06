@@ -1,7 +1,7 @@
 import { Args, Query, Resolver } from '@nestjs/graphql';
 import { CapitalizeInput } from './resolver-dto/capitalize.model';
 import { TaxReturnService } from './tax-return.service';
-import { TaxReturnClientService, SubmissionDto } from '@clients/tax-return/';
+import { TaxReturnClientService } from '@clients/tax-return/';
 import { TaxReturnInfoInput } from './resolver-dto/tax-return-info.input';
 import {
   mapTaxReturnInfo,
