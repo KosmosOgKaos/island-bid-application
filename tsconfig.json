@@ -20,5 +20,6 @@
     "paths": {
       "@clients/*": ["src/clients/*"]
     }
-  }
+  },
+  "include": ["src/**/*", "test/**/*", "sst-env.d.ts"]
 }
