@@ -10,6 +10,6 @@ export class AuthResolver {
   // This is a mock login implementation
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   login(@Args('input') input: LoginInput): LoginResponse {
-    return { success: true };
+    return { success: true, ssn: '1203894569' };
   }
 }
