@@ -6,8 +6,64 @@ input CapitalizeInput {
   input: String!
 }
 
+"""
+The `JSONObject` scalar type represents JSON objects as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf).
+"""
+scalar JSONObject
+
 type Query {
   capitalize(input: CapitalizeInput!): String!
-  getHello: String!
+  getLatestTaxReturnInfo(input: TaxReturnInfoInput!): TaxReturnInfo!
   getRandomString: String!
+}
+
+type TaxReturnInfo {
+  debts: [TaxReturnInfoDebt!]!
+  incomes: [TaxReturnInfoIncome!]!
+  person: TaxReturnInfoPerson!
+  properties: [TaxReturnInfoProperty!]!
+}
+
+type TaxReturnInfoDebt {
+  creditor: String
+  creditorSsn: String
+  currency: String!
+  description: String
+  interestPaymentTotal: Float!
+  loanDurationYears: Float
+  loanNumber: String
+  loanStartDate: String
+  nominalPaymentTotal: Float
+  properties: JSONObject
+  remaining: Float!
+  type: String!
+  yearPaymentTotal: Float
+}
+
+type TaxReturnInfoIncome {
+  amount: Float!
+  currency: String!
+  explanation: String
+  payer: String
+  type: String!
+}
+
+input TaxReturnInfoInput {
+  ssn: String!
+}
+
+type TaxReturnInfoPerson {
+  address: String!
+  email: String!
+  name: String!
+  ssn: String!
+  telephone: String
+}
+
+type TaxReturnInfoProperty {
+  currency: String!
+  properties: JSONObject
+  type: String!
+  value: Float!
+  valueName: String!
 }
