@@ -1,10 +1,14 @@
 import { Body, Controller, Get, Post } from '@nestjs/common';
 import { CapitalizeInput } from './api-dto/capitalize.input';
-import { DemoService } from './demo.service';
+import { TaxReturnService } from './tax-return.service';
+import { TaxReturnClientService } from '@clients/tax-return/tax-return-client.service';
 
 @Controller('/api')
-export class DemoController {
-  constructor(private readonly demoService: DemoService) {}
+export class TaxReturnController {
+  constructor(
+    private readonly demoService: TaxReturnService,
+    private readonly taxReturnClient: TaxReturnClientService,
+  ) {}
 
   @Get()
   getHello(): string {
@@ -20,5 +24,11 @@ export class DemoController {
   postCapitalizeName(@Body() capitalizeNameInput: CapitalizeInput): string {
     const { input } = capitalizeNameInput;
     return this.demoService.capitalize(input);
+  }
+
+  @Get('/taxReturn')
+  async getTaxReturn() {
+    const res = await this.taxReturnClient.getLatestSubmission('1203894569');
+    return res;
   }
 }
