@@ -16,6 +16,9 @@ on:
     paths:
       - 'src/**'
       - 'Dockerfile*'
+      - '.github/workflows/deploy-with-sst.yml'
+env:
+  TAX_RETURN_BASE_URL: ${{ vars.TAX_RETURN_BASE_URL }}
 
 jobs:
   build-and-deploy-with-sst:
