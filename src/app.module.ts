@@ -7,6 +7,7 @@ import { TaxReturnClientModule } from '@clients/tax-return/tax-return-client.mod
 import { TaxReturnController } from './apps/tax-return/tax-return.controller';
 import { TaxReturnService } from './apps/tax-return/tax-return.service';
 import { TaxReturnResolver } from './apps/tax-return/tax-return.resolver';
+import { AuthResolver } from './apps/auth/auth.resolver';
 
 @Module({
   imports: [
@@ -19,6 +20,11 @@ import { TaxReturnResolver } from './apps/tax-return/tax-return.resolver';
     TaxReturnClientModule,
   ],
   controllers: [TaxReturnController],
-  providers: [TaxReturnService, TaxReturnResolver, TaxReturnClientService],
+  providers: [
+    TaxReturnService,
+    TaxReturnResolver,
+    AuthResolver,
+    TaxReturnClientService,
+  ],
 })
 export class AppModule {}
