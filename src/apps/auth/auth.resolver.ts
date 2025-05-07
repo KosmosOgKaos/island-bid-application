@@ -1,15 +1,14 @@
 import { Args, Mutation, Resolver } from '@nestjs/graphql';
 import { LoginInput } from './dto/login.input';
 import { LoginResponse } from './models/login.model';
+import { AuthService } from './auth.service';
 
 @Resolver()
 export class AuthResolver {
-  constructor() {}
+  constructor(private readonly authService: AuthService) {}
 
   @Mutation(() => LoginResponse)
-  // This is a mock login implementation
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   login(@Args('input') input: LoginInput): LoginResponse {
-    return { success: true, ssn: '1203894569' };
+    return this.authService.login(input);
   }
 }

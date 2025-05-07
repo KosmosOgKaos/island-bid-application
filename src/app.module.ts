@@ -7,7 +7,7 @@ import { TaxReturnClientModule } from '@clients/tax-return/tax-return-client.mod
 import { NationalRegistryClientModule } from '@clients/national-registry/national-registry-client.module';
 import { TaxReturnService } from './apps/tax-return/tax-return.service';
 import { TaxReturnResolver } from './apps/tax-return/tax-return.resolver';
-import { AuthResolver } from './apps/auth/auth.resolver';
+import { AuthModule } from './apps/auth/auth.module';
 
 @Module({
   imports: [
@@ -19,11 +19,11 @@ import { AuthResolver } from './apps/auth/auth.resolver';
     }),
     TaxReturnClientModule,
     NationalRegistryClientModule,
+    AuthModule,
   ],
   providers: [
     TaxReturnService,
     TaxReturnResolver,
-    AuthResolver,
     TaxReturnClientService,
   ],
 })
