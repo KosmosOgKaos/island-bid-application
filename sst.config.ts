@@ -14,7 +14,8 @@ export default $config({
     const cluster = new sst.aws.Cluster('BidTaxApplicationCluster', { vpc });
 
     const TAX_RETURN_BASE_URL = process.env.TAX_RETURN_BASE_URL ?? '';
-    const NATIONAL_REGISTRY_BASE_URL = process.env.TAX_RETURN_BASE_URL ?? '';
+    const NATIONAL_REGISTRY_BASE_URL =
+      process.env.NATIONAL_REGISTRY_BASE_URL ?? '';
 
     new sst.aws.Service('BidTaxApplicationService', {
       cluster,
