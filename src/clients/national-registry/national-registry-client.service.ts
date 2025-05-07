@@ -36,4 +36,5 @@ export class NationalRegistryClientService {
       telephone: data.telephone,
     };
   }
-} 
+}
+
