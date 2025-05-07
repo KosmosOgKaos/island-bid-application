@@ -29,6 +29,9 @@ export class TaxReturnInfoPerson {
 @ObjectType()
 export class TaxReturnInfoDebt {
   @Field()
+  id: number;
+
+  @Field()
   currency: string;
 
   @Field()
@@ -71,6 +74,9 @@ export class TaxReturnInfoDebt {
 @ObjectType()
 export class TaxReturnInfoProperty {
   @Field()
+  id: number;
+
+  @Field()
   currency: string;
 
   @Field()
@@ -89,6 +95,9 @@ export class TaxReturnInfoProperty {
 @ObjectType()
 export class TaxReturnInfoIncome {
   @Field()
+  id: number;
+
+  @Field()
   amount: number;
 
   @Field()
@@ -103,6 +112,7 @@ export class TaxReturnInfoIncome {
   @Field({ nullable: true })
   payer?: string;
 }
+
 @ObjectType()
 export class TaxReturnInfo {
   @Field(() => TaxReturnInfoPerson, { nullable: true })
@@ -126,8 +136,6 @@ export const mapTaxReturnInfo = (
   person: PersonDTO | undefined,
   ssn: string,
 ): TaxReturnInfo => {
-  console.log('person', person);
-  console.log('submission', submission);
   if (!person) {
     return {
       error: `Person with SSN ${ssn} was not found`,
