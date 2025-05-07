@@ -12,7 +12,8 @@ input LoginInput {
 }
 
 type LoginResponse {
-  ssn: String!
+  error: String
+  ssn: String
   success: Boolean!
 }
 

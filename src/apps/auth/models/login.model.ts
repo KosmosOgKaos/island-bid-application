@@ -5,6 +5,9 @@ export class LoginResponse {
   @Field()
   success: boolean;
 
-  @Field()
-  ssn: string;
+  @Field({ nullable: true })
+  ssn?: string;
+
+  @Field({ nullable: true })
+  error?: string;
 }
