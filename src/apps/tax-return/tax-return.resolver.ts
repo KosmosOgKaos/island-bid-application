@@ -1,7 +1,8 @@
-import { Args, Query, Resolver } from '@nestjs/graphql';
+import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { TaxReturnService } from './tax-return.service';
 import { TaxReturnInfoInput } from './resolver-dto/tax-return-info.input';
 import { TaxReturnInfo } from './resolver-dto/tax-return-info.model';
+import { CreateSubmissionInput } from './resolver-dto/create-submission.input';
 
 @Resolver()
 export class TaxReturnResolver {
@@ -18,5 +19,13 @@ export class TaxReturnResolver {
       return res;
     }
     return undefined;
+  }
+
+  @Mutation(() => TaxReturnInfo)
+  async createSubmission(
+    @Args('ssn') ssn: string,
+    @Args('input') input: CreateSubmissionInput,
+  ): Promise<TaxReturnInfo | undefined> {
+    return await this.taxReturnService.createSubmission(ssn, input);
   }
 }

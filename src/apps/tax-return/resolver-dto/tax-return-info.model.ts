@@ -3,7 +3,7 @@ import {
   DebtType,
   IncomeType,
   PropertyType,
-  SubmissionDto,
+  SubmissionResponseDto,
 } from '@clients/tax-return';
 import { Field, ObjectType } from '@nestjs/graphql';
 import { GraphQLJSONObject } from 'graphql-type-json';
@@ -132,7 +132,7 @@ export class TaxReturnInfo {
 }
 
 export const mapTaxReturnInfo = (
-  submission: SubmissionDto | undefined,
+  submission: SubmissionResponseDto | undefined,
   person: PersonDTO | undefined,
   ssn: string,
 ): TaxReturnInfo => {
@@ -172,18 +172,18 @@ export const mapTaxReturnInfoPerson = (
 };
 
 export const mapTaxReturnInfoDebt = (
-  debt: SubmissionDto['debts'][0],
+  debt: SubmissionResponseDto['debts'][0],
 ): TaxReturnInfoDebt => {
-  const { creditorKennitala } = debt;
+  const { creditorSsn } = debt;
 
   return {
     ...debt,
-    creditorSsn: creditorKennitala,
+    creditorSsn: creditorSsn,
   };
 };
 
 export const mapTaxReturnInfoIncome = (
-  income: SubmissionDto['incomes'][0],
+  income: SubmissionResponseDto['incomes'][0],
 ): TaxReturnInfoIncome => {
   return {
     ...income,
@@ -191,7 +191,7 @@ export const mapTaxReturnInfoIncome = (
 };
 
 export const mapTaxReturnInfoProperty = (
-  property: SubmissionDto['properties'][0],
+  property: SubmissionResponseDto['properties'][0],
 ): TaxReturnInfoProperty => {
   return {
     ...property,
