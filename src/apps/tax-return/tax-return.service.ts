@@ -1,16 +1,25 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
+import { TaxReturnClientService } from '@clients/tax-return';
+import { NationalRegistryClientService } from '@clients/national-registry/national-registry-client.service';
+import {
+  TaxReturnInfo,
+  mapTaxReturnInfo,
+} from './resolver-dto/tax-return-info.model';
 
 @Injectable()
 export class TaxReturnService {
-  getHello(): string {
-    return 'Hello World!';
-  }
+  constructor(
+    private readonly taxReturnClient: TaxReturnClientService,
+    private readonly nationalRegistryClient: NationalRegistryClientService,
+  ) {}
 
-  getFakeStringData(): string {
-    return Math.random().toString(36).substring(2);
-  }
+  async getPersonWithLatestTaxReturn(
+    kennitala: string,
+  ): Promise<TaxReturnInfo> {
+    const person =
+      await this.nationalRegistryClient.getPersonByKennitala(kennitala);
+    const taxReturn = await this.taxReturnClient.getLatestSubmission(kennitala);
 
-  capitalize(input: string): string {
-    return `${input.at(0)?.toUpperCase()}${input.substring(1)}`;
+    return mapTaxReturnInfo(taxReturn, person, kennitala);
   }
 }
