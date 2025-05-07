@@ -38,6 +38,7 @@ type TaxReturnInfoDebt {
   creditorSsn: String
   currency: String!
   description: String
+  id: Float!
   interestPaymentTotal: Float!
   loanDurationYears: Float
   loanNumber: String
@@ -53,6 +54,7 @@ type TaxReturnInfoIncome {
   amount: Float!
   currency: String!
   explanation: String
+  id: Float!
   payer: String
   type: String!
 }
@@ -71,6 +73,7 @@ type TaxReturnInfoPerson {
 
 type TaxReturnInfoProperty {
   currency: String!
+  id: Float!
   properties: JSONObject
   type: String!
   value: Float!
