@@ -19,6 +19,7 @@ on:
       - '.github/workflows/deploy-with-sst.yml'
 env:
   TAX_RETURN_BASE_URL: ${{ vars.TAX_RETURN_BASE_URL }}
+  NATIONAL_REGISTRY_BASE_URL: ${{ vars.NATIONAL_REGISTRY_BASE_URL }}
 
 jobs:
   build-and-deploy-with-sst:
