@@ -4,7 +4,7 @@ import { GraphQLModule } from '@nestjs/graphql';
 import { join } from 'path';
 import { TaxReturnClientService } from '@clients/tax-return/tax-return-client.service';
 import { TaxReturnClientModule } from '@clients/tax-return/tax-return-client.module';
-import { TaxReturnController } from './apps/tax-return/tax-return.controller';
+import { NationalRegistryClientModule } from '@clients/national-registry/national-registry-client.module';
 import { TaxReturnService } from './apps/tax-return/tax-return.service';
 import { TaxReturnResolver } from './apps/tax-return/tax-return.resolver';
 import { AuthResolver } from './apps/auth/auth.resolver';
@@ -18,8 +18,8 @@ import { AuthResolver } from './apps/auth/auth.resolver';
       sortSchema: true,
     }),
     TaxReturnClientModule,
+    NationalRegistryClientModule,
   ],
-  controllers: [TaxReturnController],
   providers: [
     TaxReturnService,
     TaxReturnResolver,

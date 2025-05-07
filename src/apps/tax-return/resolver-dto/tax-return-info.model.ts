@@ -1,3 +1,4 @@
+import { PersonDTO } from '@clients/national-registry/dto/person.dto';
 import {
   DebtType,
   IncomeType,
@@ -104,33 +105,61 @@ export class TaxReturnInfoIncome {
 }
 @ObjectType()
 export class TaxReturnInfo {
-  @Field()
-  person: TaxReturnInfoPerson;
+  @Field(() => TaxReturnInfoPerson, { nullable: true })
+  person?: TaxReturnInfoPerson;
 
-  @Field(() => [TaxReturnInfoDebt])
-  debts: Array<TaxReturnInfoDebt>;
+  @Field(() => [TaxReturnInfoDebt], { nullable: true })
+  debts?: Array<TaxReturnInfoDebt>;
 
-  @Field(() => [TaxReturnInfoIncome])
-  incomes: Array<TaxReturnInfoIncome>;
+  @Field(() => [TaxReturnInfoIncome], { nullable: true })
+  incomes?: Array<TaxReturnInfoIncome>;
 
-  @Field(() => [TaxReturnInfoProperty])
-  properties: Array<TaxReturnInfoProperty>;
+  @Field(() => [TaxReturnInfoProperty], { nullable: true })
+  properties?: Array<TaxReturnInfoProperty>;
+
+  @Field({ nullable: true })
+  error?: string;
 }
 
-export const mapTaxReturnInfo = (submission: SubmissionDto): TaxReturnInfo => {
-  const { person, debts, incomes, properties } = submission;
+export const mapTaxReturnInfo = (
+  submission: SubmissionDto | undefined,
+  person: PersonDTO | undefined,
+  ssn: string,
+): TaxReturnInfo => {
+  console.log('person', person);
+  console.log('submission', submission);
+  if (!person) {
+    return {
+      error: `Person with SSN ${ssn} was not found`,
+    };
+  }
 
-  // Person
-  const { kennitala } = person;
+  if (!submission) {
+    return {
+      person: mapTaxReturnInfoPerson(person),
+      error: `No tax return submission found for person with SSN ${ssn}`,
+    };
+  }
+
+  const { debts, incomes, properties } = submission;
 
   return {
-    person: {
-      ...person,
-      ssn: kennitala,
-    },
-    debts: debts.map(mapTaxReturnInfoDebt),
-    incomes: incomes.map(mapTaxReturnInfoIncome),
-    properties: properties.map(mapTaxReturnInfoProperty),
+    person: mapTaxReturnInfoPerson(person),
+    debts: debts?.map(mapTaxReturnInfoDebt) ?? [],
+    incomes: incomes?.map(mapTaxReturnInfoIncome) ?? [],
+    properties: properties?.map(mapTaxReturnInfoProperty) ?? [],
+  };
+};
+
+export const mapTaxReturnInfoPerson = (
+  person: PersonDTO,
+): TaxReturnInfoPerson => {
+  return {
+    name: person.name,
+    ssn: person.kennitala,
+    address: person.address,
+    email: person.email,
+    telephone: person.telephone,
   };
 };
 
