@@ -2,6 +2,44 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+input CreateDebtInput {
+  creditor: String
+  creditorSsn: String
+  currency: String!
+  description: String
+  interestPaymentTotal: Float!
+  loanDurationYears: Float
+  loanNumber: String
+  loanStartDate: String
+  nominalPaymentTotal: Float
+  properties: JSONObject
+  remaining: Float!
+  type: String!
+  yearPaymentTotal: Float
+}
+
+input CreateIncomeInput {
+  amount: Float!
+  currency: String!
+  explanation: String
+  payer: String
+  type: String!
+}
+
+input CreatePropertyInput {
+  currency: String!
+  properties: JSONObject
+  type: String!
+  value: Float!
+  valueName: String!
+}
+
+input CreateSubmissionInput {
+  debts: [CreateDebtInput!]!
+  incomes: [CreateIncomeInput!]!
+  properties: [CreatePropertyInput!]!
+}
+
 """
 The `JSONObject` scalar type represents JSON objects as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf).
 """
@@ -18,6 +56,7 @@ type LoginResponse {
 }
 
 type Mutation {
+  createSubmission(input: CreateSubmissionInput!, ssn: String!): TaxReturnInfo!
   login(input: LoginInput!): LoginResponse!
 }
 
