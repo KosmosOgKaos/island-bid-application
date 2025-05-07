@@ -5,6 +5,16 @@ import {
   TaxReturnInfo,
   mapTaxReturnInfo,
 } from './resolver-dto/tax-return-info.model';
+import { CreateSubmissionDto } from '@clients/tax-return';
+import { CreateSubmissionInput } from './resolver-dto/create-submission.input';
+
+const mapToSubmissionDto = (
+  input: CreateSubmissionInput,
+): CreateSubmissionDto => ({
+  incomes: input.incomes.map((income) => ({ ...income })),
+  properties: input.properties.map((property) => ({ ...property })),
+  debts: input.debts.map((debt) => ({ ...debt })),
+});
 
 @Injectable()
 export class TaxReturnService {
@@ -21,5 +31,18 @@ export class TaxReturnService {
     const taxReturn = await this.taxReturnClient.getLatestSubmission(kennitala);
 
     return mapTaxReturnInfo(taxReturn, person, kennitala);
+  }
+
+  async createSubmission(
+    ssn: string,
+    submission: CreateSubmissionInput,
+  ): Promise<TaxReturnInfo> {
+    const submissionDto = mapToSubmissionDto(submission);
+    const taxReturn = await this.taxReturnClient.createSubmission(
+      ssn,
+      submissionDto,
+    );
+    const person = await this.nationalRegistryClient.getPersonByKennitala(ssn);
+    return mapTaxReturnInfo(taxReturn, person, ssn);
   }
 }
