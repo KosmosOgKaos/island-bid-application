@@ -4,8 +4,10 @@ services:
       context: .
       dockerfile: Dockerfile
       args:
-        - TAX_RETURN_BASE_URL_ARG=http://bidtaxbackendse-eannwhsz-1009143891.eu-west-2.elb.amazonaws.com
+        - TAX_RETURN_BASE_URL_ARG=https://utbod-skattur.juni.is
+        - NATIONAL_REGISTRY_BASE_URL_ARG=https://utbod-thjodskra.juni.is
     environment:
-      TAX_RETURN_BASE_URL: http://bidtaxbackendse-eannwhsz-1009143891.eu-west-2.elb.amazonaws.com
+      TAX_RETURN_BASE_URL: https://utbod-skattur.juni.is
+      NATIONAL_REGISTRY_BASE_URL: https://utbod-thjodskra.juni.is
     ports:
       - 3000:3000
