@@ -8,6 +8,7 @@
   "scripts": {
     "build": "nest build",
     "codegen:tax-return": "openapi-ts --file ./src/clients/tax-return/client-config.ts",
+    "codegen:national-registry": "openapi-ts --file ./src/clients/national-registry/client-config.ts",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
     "deploy:production": "sst deploy --stage production",
@@ -82,5 +83,6 @@
     "transform": {
       "^.+\\.(t|j)s$": "ts-jest"
     }
-  }
+  },
+  "packageManager": "yarn@1.22.22+sha512.a6b2f7906b721bba3d67d4aff083df04dad64c399707841b7acf00f6b133b7ac24255f2652fa22ae3534329dc6180534e98d17432037ff6fd140556e2bb3137e"
 }
