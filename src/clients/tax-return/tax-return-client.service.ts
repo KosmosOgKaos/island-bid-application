@@ -11,7 +11,7 @@ export class TaxReturnClientService {
     const { data } = await taxReturnControllerGetLatestSubmission({
       ...fetchConfig,
       path: {
-        kennitala: ssn,
+        ssn: ssn,
       },
     });
 
