@@ -138,13 +138,13 @@ export const mapTaxReturnInfo = (
 ): TaxReturnInfo => {
   if (!person) {
     return {
-      error: `Person with SSN ${ssn} was not found`,
+      error: `Einstaklingur með kennitölu ${ssn} finnst ekki`,
     };
   }
   if (!submission || Object.keys(submission).length === 0) {
     return {
       person: mapTaxReturnInfoPerson(person),
-      error: `No tax return submission found for person with SSN ${ssn}`,
+      error: `Ekkert skattframtal finnst fyrir kennitöluna ${ssn}`,
     };
   }
 

@@ -25,7 +25,7 @@ export class AuthService {
     }
     return {
       success: false,
-      error: 'User with phone number ' + input.phoneNumber + ' not found',
+      error: 'Notandi með símanúmer ' + input.phoneNumber + ' finnst ekki',
     };
   }
 }
