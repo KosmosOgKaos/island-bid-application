@@ -21,10 +21,6 @@ import { AuthModule } from './apps/auth/auth.module';
     NationalRegistryClientModule,
     AuthModule,
   ],
-  providers: [
-    TaxReturnService,
-    TaxReturnResolver,
-    TaxReturnClientService,
-  ],
+  providers: [TaxReturnService, TaxReturnResolver, TaxReturnClientService],
 })
 export class AppModule {}
