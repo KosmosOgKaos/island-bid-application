@@ -13,12 +13,14 @@ export class AuthService {
       return {
         success: true,
         ssn: '1203894569',
+        name: 'Jökull Þórðarson',
       };
     }
     if (cleanPhoneNumber === '5556969') {
       return {
         success: true,
         ssn: '2811882089',
+        name: 'Kristleifur Þorsteinsson',
       };
     }
     return {

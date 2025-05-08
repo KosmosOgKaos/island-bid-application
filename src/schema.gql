@@ -51,6 +51,7 @@ input LoginInput {
 
 type LoginResponse {
   error: String
+  name: String
   ssn: String
   success: Boolean!
 }

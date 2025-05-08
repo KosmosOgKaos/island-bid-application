@@ -9,5 +9,8 @@ export class LoginResponse {
   ssn?: string;
 
   @Field({ nullable: true })
+  name?: string;
+
+  @Field({ nullable: true })
   error?: string;
 }
