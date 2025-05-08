@@ -26,7 +26,6 @@ export class TaxReturnClientService {
     ssn: string,
     submission: CreateSubmissionDto,
   ): Promise<SubmissionResponseDto | undefined> {
-
     try {
       const response = await taxReturnControllerCreateSubmission({
         ...fetchConfig,
