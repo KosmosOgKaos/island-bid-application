@@ -141,8 +141,7 @@ export const mapTaxReturnInfo = (
       error: `Person with SSN ${ssn} was not found`,
     };
   }
-
-  if (!submission) {
+  if (!submission || Object.keys(submission).length === 0) {
     return {
       person: mapTaxReturnInfoPerson(person),
       error: `No tax return submission found for person with SSN ${ssn}`,
