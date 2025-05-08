@@ -13,6 +13,7 @@ env:
 jobs:
   build:
     runs-on: ubuntu-latest
+    environment: testing
     steps:
       - uses: actions/checkout@v4
       - name: Use Node.js ${{ matrix.node-version }}
@@ -21,8 +22,8 @@ jobs:
           node-version: 22.x
           cache: 'npm'
       - run: npm i
-      - run: npm codegen:national-registry
-      - run: npm codegen:tax-return
+      - run: npm run codegen:national-registry
+      - run: npm run codegen:tax-return
       - run: npm run build --if-present
       - run: npm run test
       - run: npm run test:cov
